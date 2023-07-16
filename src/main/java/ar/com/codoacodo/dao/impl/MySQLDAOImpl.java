@@ -4,6 +4,7 @@ package ar.com.codoacodo.dao.impl;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -47,8 +48,31 @@ public class MySQLDAOImpl implements DAO {
     }
 
     @Override
-    public ArrayList<Articulo> findAll() {
+    public ArrayList<Articulo> findAll() throws Exception {
         String sql = "select * from " + tableName + "";
+
+        // Obtener la Connection
+        Connection con = AdministradorDeConexiones.getConnection();
+
+        // PreaparedStatement con mi sql
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        var listado = new ArrayList<>();
+
+        ResultSet res = pst.executeQuery();
+
+        while(res.next()) {
+            Long id = res.getLong(1);
+            String titulo = res.getString(2);
+            String imagen = res.getString(3);
+            String autor = res.getString(4);
+            String novedad = res.getString(5);
+            Date fechaCreacion = res.getDate(6);
+            String codigo = res.getString(7);
+            Double precio = res.getDouble(8);
+
+            Articulo a = new Articulo(id, titulo, imagen, autor, 0, false, codigo, LocalDateTime.now());
+        }
         return null;
     }
 
@@ -87,5 +111,11 @@ public class MySQLDAOImpl implements DAO {
 
         // Calendar
         // Gregorian Calendar
+    }
+
+    @Override
+    public ArrayList<Articulo> findAllByTitle(String clave) throws Exception {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'findAllByTitle'");
     }
 }

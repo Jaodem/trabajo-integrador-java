@@ -14,4 +14,5 @@ public interface DAO {
     public ArrayList<Articulo> findAll() throws Exception;
     public void update(Articulo articulo) throws Exception; // Tiene id
     public void create(Articulo articulo) throws Exception; // No tiene id
+    public ArrayList<Articulo> findAllByTitle(String clave) throws Exception;
 }

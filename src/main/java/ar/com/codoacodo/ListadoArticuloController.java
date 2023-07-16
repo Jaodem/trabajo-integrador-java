@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,11 +18,13 @@ import ar.com.codoacodo.oop.Articulo;
 import ar.com.codoacodo.oop.Libro;
 
 // App.java = Clase java
+@WebServlet("/ListadoArticuloController")
 public class ListadoArticuloController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        // Interface nombre = new ClaseQueImplementaLaInterface();
         DAO dao = new MySQLDAOImpl();
 
         try {

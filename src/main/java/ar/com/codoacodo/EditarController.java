@@ -1,4 +1,3 @@
-//paquete: ar/com/codo
 package ar.com.codoacodo;
 
 import java.io.IOException;
@@ -15,15 +14,33 @@ import ar.com.codoacodo.dao.impl.MySQLDAOImpl;
 import ar.com.codoacodo.oop.Articulo;
 import ar.com.codoacodo.oop.Libro;
 
-//App.java = Clase java
-@WebServlet("/AltaArticuloController")
-public class AltaArticuloController extends HttpServlet {
+@WebServlet("/EditarController")
+public class EditarController extends HttpServlet {
 
-    @Override
+    // esto lo maneja el servidor (Tomcat)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        String id = req.getParameter("id");
+
+        DAO dao = new MySQLDAOImpl();
+
+        try {
+            // success
+            Articulo producto = dao.getById(Long.parseLong(id));
+
+            req.setAttribute("producto",producto);
+        } catch (Exception e) {
+            // error
+            req.setAttribute("error", "No se ha eliminado el articulo");
+            getServletContext().getRequestDispatcher("/ListadoArticuloController").forward(req, resp);//GET
+        }
+
+        // redirect
+        getServletContext().getRequestDispatcher("/editar.jsp").forward(req, resp);//GET
+    }
+    
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // CREATE CONTROLLER 
-        System.out.println("AltaArticuloController");
-        // Tendria que tener los parametros del front (<form>)
+        //tendria que tener los parametros del front (<form>)
         String titulo = req.getParameter("nombre");
         double precio = Double.parseDouble(req.getParameter("precio"));
         String autor  = req.getParameter("autor");
@@ -31,22 +48,22 @@ public class AltaArticuloController extends HttpServlet {
         String isbn  = "123465465456";
         LocalDateTime fechaCreacion = LocalDateTime.now();
         
-        Articulo nuevo = new Libro(titulo, codigo, autor, precio, false, isbn,codigo,fechaCreacion);
+        Articulo nuevo = new Articulo(null, titulo, isbn, autor, precio, false, codigo, fechaCreacion);
         
         //Interface nombre  = new ClaseQueImplementaLaIntarface();
         DAO dao = new MySQLDAOImpl();
         
         //puedo usar lo metodos que tiene DAO, sin saber quien cumple el contrato
         try {
-            dao.create(nuevo);
+            dao.update(nuevo);
             //redirect
             //getServletContext().getRequestDispatcher("/ListadoArticuloController").forward(req, resp);//POST ListadoArticuloController
             resp.sendRedirect(req.getContextPath() + "/ListadoArticuloController");
         } catch (Exception e) {
             //redirect
-            getServletContext().getRequestDispatcher("/nuevo.jsp").forward(req, resp);
+            getServletContext().getRequestDispatcher("/editar.jsp").forward(req, resp);
             e.printStackTrace();
         } //try/catch/finally
-
     }
+    
 }

@@ -4,34 +4,58 @@ import java.time.LocalDateTime;
 
 // Todas las clases son hijas de Object
 // Nombre
-public abstract class Articulo {
+public class Articulo {
+
     // Atributos: convertir a protected
+    protected Long id;
     protected String titulo;
-    protected Double precio;
-    protected String imagen;
+    protected double precio;
+    protected String imagen; 
     protected String autor;
     protected boolean novedad;
-    protected LocalDateTime fechaCreacion;
+    protected LocalDateTime fechaCreacion;//alt+shit+r
     protected String codigo;
-
-    // Constructor|es
-    // Si no se escribe el constructor , JVM da uno por defecto
+   
+    // Constuctor/es
+    // Si no escribo el constructor, JVM me da uno por defecto
     public Articulo(
         String titulo,
-        double precio,
         String imagen,
         String autor,
+        double precio,
         boolean novedad,
         String codigo,
         LocalDateTime fechaCreacion
-    ) {
-        this.titulo = titulo;
-        this.precio = precio;
+    )
+    {
+            extracted(titulo, imagen, autor, precio, novedad, codigo, fechaCreacion);
+    }
+
+    public Articulo(
+        Long id,
+        String titulo,
+        String imagen,
+        String autor,
+        double precio,
+        boolean novedad,
+        String codigo,
+        LocalDateTime fechaCreacion
+    )
+    {
+            extracted(titulo, imagen, autor, precio, novedad, codigo, fechaCreacion);
+            this.id = id;
+    }
+
+    private void extracted(String titulo, String imagen, String autor, double precio, boolean novedad, String codigo,
+            LocalDateTime fechaCreacion) {
         this.imagen = imagen;
+        this.titulo = titulo;
         this.autor = autor;
         this.novedad = false;
-        this.codigo = codigo;
         this.fechaCreacion = fechaCreacion;
+        this.precio = precio;
+        this.novedad = novedad;
+        this.codigo = codigo;
     }
 
     // Métodos: va entre llaves
@@ -53,11 +77,11 @@ public abstract class Articulo {
         this.titulo = titulo;
     }
 
-    public Double getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
@@ -85,13 +109,6 @@ public abstract class Articulo {
         this.novedad = novedad;
     }
 
-    public LocalDateTime getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(LocalDateTime fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
 
     public String getCodigo() {
         return codigo;
@@ -101,4 +118,20 @@ public abstract class Articulo {
         this.codigo = codigo;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+    
 }

@@ -1,3 +1,4 @@
+<%@ page import="ar.com.codoacodo.oop.Articulo" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,12 +13,15 @@
 </head>
 <body>
     <jsp:include page="navbar.jsp"/>
+      <% 
+      Articulo articulo = (Articulo)request.getAttribute("producto");
+     %>
     <div class="container">
         <div class="row">
             <div class="col-12">
                 <section>
-                    <h1>Alta Articulo</h1>
-                    <form method="post" action="<%=request.getContextPath()%>/AltaArticuloController">
+                    <h1>Editar Articulo id=<%=articulo.getId()%></h1>
+                    <form method="post" action="<%=request.getContextPath()%>/EditarController?id=<%=articulo.getId()%>">
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" 
                                 class="form-label">Nombre</label>
@@ -26,7 +30,8 @@
                                 class="form-control" 
                                 id="exampleFormControlInput1"
                                 placeholder="Nombre"
-                                maxlength="50">
+                                maxlength="50"
+                                value="<%=articulo.getTitulo()%>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" 
@@ -35,7 +40,8 @@
                             <input name="precio" 
                                 type="number" 
                                 class="form-control" 
-                                id="exampleFormControlTextarea1">
+                                id="exampleFormControlTextarea1"
+                                value="<%=articulo.getPrecio()%>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" 
@@ -44,7 +50,8 @@
                             <input name="imagen" 
                                 type="file" 
                                 class="form-control" 
-                                id="exampleFormControlTextarea1">
+                                id="exampleFormControlTextarea1"
+                                value="<%=articulo.getImagen()%>">
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" 
@@ -52,9 +59,12 @@
                             </label>
                             <input name="codigo" 
                                 type="text" 
+                                disabled
+                                readonly
                                 class="form-control" 
                                 id="exampleFormControlTextarea1" 
-                                maxlength="7">
+                                maxlength="7"
+                                value="<%=articulo.getCodigo()%>">
                         </div>
                         <div class="mb-3">
                             <label for="autor" 
@@ -64,10 +74,11 @@
                                 type="text" 
                                 class="form-control" 
                                 id="autor" 
-                                maxlength="50">
+                                maxlength="50"
+                                value="<%=articulo.getCodigo()%>">
                         </div>
                         <button class="btn btn-primary">
-                            Dar de alta
+                            Modificar
                         </button>
                     </form>
                 </section>
