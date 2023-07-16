@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-dark border-bottom border-bottom-dark" data-bs-theme="dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Navbar</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,7 +19,7 @@
                 <a
                     class="nav-link active"
                     aria-current="page"
-                    href="nuevo.html">
+                    href="nuevo.jsp">
                         Nuevo
                 </a>
               </li>
@@ -27,7 +27,7 @@
                 <a
                     class="nav-link active"
                     aria-current="page"
-                    href="listado.html">
+                    href="<%=request.getContextPath()%>/ListadoArticuloController">
                         Listado
                 </a>
               </li>

@@ -33,9 +33,17 @@ public class MySQLDAOImpl implements DAO {
 
 
     @Override
-    public void delete(Long id) {
-        String sql = "delete from " + tableName + " where id = " + id;
-        // Acá va la magia que falta
+    public void delete(Long id) throws Exception {
+        String sql = "delete from " + tableName + " where id = ? ";
+        // Obtener la Connection
+        Connection con = AdministradorDeConexiones.getConnection();
+
+        // PreaparedStatement con mi sql
+        PreparedStatement pst = con.prepareStatement(sql);
+
+        pst.setLong(1, id);
+
+        pst.executeUpdate();
     }
 
     @Override

@@ -23,11 +23,11 @@ public class AltaArticuloController extends HttpServlet {
         // Create Controller
 
         // Se tendría que tener los parámetros del front (<form>)
-        String titulo = "titulo";
-        double precio = 1200;
-        String autor = "autor";
-        String codigo = "321";
-        String isbn = "654";
+        String titulo = req.getParameter("nombre");
+        double precio = Double.parseDouble(req.getParameter("precio"));
+        String autor  = req.getParameter("autor");
+        String codigo  = req.getParameter("codigo");
+        String isbn  = "123465465456";
         LocalDateTime fechaCreacion = LocalDateTime.now();
 
         Articulo nuevo = new Libro(titulo, precio, titulo, autor, false, codigo, fechaCreacion, isbn);
