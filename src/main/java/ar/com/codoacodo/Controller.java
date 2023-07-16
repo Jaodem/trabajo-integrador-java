@@ -6,13 +6,13 @@ import java.time.LocalDateTime;
 import ar.com.codoacodo.dao.impl.DAO;
 import ar.com.codoacodo.dao.impl.MySQLDAOImpl;
 import ar.com.codoacodo.oop.Articulo;
+import ar.com.codoacodo.oop.Libro;
 
 // App.java = Clase java
 public class Controller {
     public static void main( String[] args ) {
-        // Interface nombre = new ClaseQueImplementaLaInterface();
-        DAO dao = new MySQLDAOImpl();
 
+        // Create Controller
         // Se tendría que tener los parámetros del front (<form>)
         String titulo = "titulo del front";
         double precio = 1200;
@@ -21,9 +21,14 @@ public class Controller {
         String isbn = "654";
         LocalDateTime ldt = LocalDateTime.now();
 
-        // Se puede usar métodos que tiene DAO, sin saber quien cumple el contrato
-        Articulo a = dao.getById(1l);
+        Articulo nuevo = new Libro(titulo, precio, codigo, autor, false, isbn);
 
-        System.out.println(a);
+        // Interface nombre = new ClaseQueImplementaLaInterface();
+        DAO dao = new MySQLDAOImpl();
+
+        // Se puede usar métodos que tiene DAO, sin saber quien cumple el contrato
+        dao.create(nuevo);
+
+        System.out.println(nuevo);
     }
 }
