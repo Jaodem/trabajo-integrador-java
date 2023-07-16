@@ -4,7 +4,7 @@ public class Musica extends Articulo {
     private String sello;
 
     public Musica(String titulo, double precio, String imagen, String autor, boolean novedad, String sello) {
-        super(titulo, precio, imagen, autor, novedad);
+        super(titulo, precio, imagen, autor, novedad, null, null);
         this.sello = sello;
     }
 

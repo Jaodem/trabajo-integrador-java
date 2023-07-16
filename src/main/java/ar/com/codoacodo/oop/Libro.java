@@ -1,5 +1,7 @@
 package ar.com.codoacodo.oop;
 
+import java.time.LocalDateTime;
+
 // Libro es hijo (extends) de Articulo
 public class Libro extends Articulo {
     // Atributo
@@ -12,10 +14,12 @@ public class Libro extends Articulo {
         String imagen,
         String autor,
         boolean novedad,
+        String codigo,
+        LocalDateTime fechaCreacion,
         String isbn
     ) {
         // 1 - Nace el padre
-        super(titulo, precio, imagen, autor, novedad);
+        super(titulo, precio, imagen, autor, novedad, codigo, fechaCreacion);
 
         // 2 - Nace el hijo
         this.isbn = isbn;
