@@ -75,7 +75,7 @@
                                 class="form-control" 
                                 id="autor" 
                                 maxlength="50"
-                                value="<%=articulo.getCodigo()%>">
+                                value="<%=articulo.getAutor()%>">
                         </div>
                         <button class="btn btn-secondary">
                             Modificar
