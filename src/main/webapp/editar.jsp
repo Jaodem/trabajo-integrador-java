@@ -11,7 +11,7 @@
     <title>CaC23049</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-dark">
     <jsp:include page="navbar.jsp"/>
       <% 
       Articulo articulo = (Articulo)request.getAttribute("producto");
@@ -20,11 +20,11 @@
         <div class="row">
             <div class="col-12">
                 <section>
-                    <h1>Editar Articulo id=<%=articulo.getId()%></h1>
+                    <h1 class="text-light">Editar Articulo id=<%=articulo.getId()%></h1>
                     <form method="post" action="<%=request.getContextPath()%>/EditarController?id=<%=articulo.getId()%>">
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" 
-                                class="form-label">Nombre</label>
+                                class="form-label text-light">Articulo</label>
                             <input name="nombre" 
                                 type="text" 
                                 class="form-control" 
@@ -35,7 +35,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" 
-                                class="form-label">Precio
+                                class="form-label text-light">Precio
                             </label>
                             <input name="precio" 
                                 type="number" 
@@ -45,7 +45,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" 
-                                class="form-label">Im&aacute;gen
+                                class="form-label text-light">Imagen
                             </label>
                             <input name="imagen" 
                                 type="file" 
@@ -55,7 +55,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlTextarea1" 
-                                class="form-label">C&oacute;digo
+                                class="form-label text-light">Codigo
                             </label>
                             <input name="codigo" 
                                 type="text" 
@@ -68,7 +68,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="autor" 
-                                class="form-label">Autor
+                                class="form-label text-light">Autor
                             </label>
                             <input name="autor" 
                                 type="text" 
@@ -77,7 +77,7 @@
                                 maxlength="50"
                                 value="<%=articulo.getCodigo()%>">
                         </div>
-                        <button class="btn btn-primary">
+                        <button class="btn btn-secondary">
                             Modificar
                         </button>
                     </form>

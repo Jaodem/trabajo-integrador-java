@@ -25,45 +25,47 @@ public class EditarController extends HttpServlet {
         DAO dao = new MySQLDAOImpl();
 
         try {
-            // success
-            Articulo producto = dao.getById(Long.parseLong(id));
+            Articulo articulo = dao.getById(Long.parseLong(id));
 
-            req.setAttribute("producto",producto);
+            req.setAttribute("producto", articulo);
         } catch (Exception e) {
-            // error
             req.setAttribute("error", "No se ha eliminado el articulo");
-            getServletContext().getRequestDispatcher("/ListadoArticuloController").forward(req, resp);//GET
+            getServletContext().getRequestDispatcher("/ListadoArticuloController").forward(req, resp);
         }
 
-        // redirect
-        getServletContext().getRequestDispatcher("/editar.jsp").forward(req, resp);//GET
+        getServletContext().getRequestDispatcher("/editar.jsp").forward(req, resp);
     }
-    
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //tendria que tener los parametros del front (<form>)
-        String titulo = req.getParameter("nombre");
-        double precio = Double.parseDouble(req.getParameter("precio"));
-        String autor  = req.getParameter("autor");
-        String codigo  = req.getParameter("codigo");
-        String isbn  = "123465465456";
-        LocalDateTime fechaCreacion = LocalDateTime.now();
-        
-        Articulo nuevo = new Articulo(null, titulo, isbn, autor, precio, false, codigo, fechaCreacion);
-        
-        //Interface nombre  = new ClaseQueImplementaLaIntarface();
+        // Obtener el ID del artículo del parámetro de la solicitud
+        String id = req.getParameter("id");
+
+        // Obtener el DAO y el artículo existente por su ID
         DAO dao = new MySQLDAOImpl();
-        
-        //puedo usar lo metodos que tiene DAO, sin saber quien cumple el contrato
         try {
-            dao.update(nuevo);
-            //redirect
-            //getServletContext().getRequestDispatcher("/ListadoArticuloController").forward(req, resp);//POST ListadoArticuloController
+            Articulo articuloExistente = dao.getById(Long.parseLong(id));
+
+            // Obtener los parámetros del formulario
+            String titulo = req.getParameter("nombre");
+            double precio = Double.parseDouble(req.getParameter("precio"));
+            String autor = req.getParameter("autor");
+            String codigo = req.getParameter("codigo");
+            String isbn = "123465465456";
+            LocalDateTime fechaCreacion = LocalDateTime.now();
+
+            // Crear el objeto Articulo actualizado
+            Articulo articuloActualizado = new Libro(titulo, codigo, autor, precio, false, isbn, codigo, fechaCreacion);
+            articuloActualizado.setId(articuloExistente.getId());
+
+            // Actualizar el artículo en la base de datos
+            dao.update(articuloActualizado);
+
+            // Redirigir a la página de listado de artículos
             resp.sendRedirect(req.getContextPath() + "/ListadoArticuloController");
         } catch (Exception e) {
-            //redirect
-            getServletContext().getRequestDispatcher("/editar.jsp").forward(req, resp);
+            // Manejar la excepción
             e.printStackTrace();
-        } //try/catch/finally
+            getServletContext().getRequestDispatcher("/editar.jsp").forward(req, resp);
+        }
     }
-    
 }
